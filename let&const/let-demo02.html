@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+</head>
+<body>
+<script>
+    var arr = [];
+    for (var i = 0; i < 10; i++) {
+        arr[i] = function () {
+            console.log(i);
+        }
+    }
+    arr[6]();//10
+
+    var lArr = [];
+    for(let j = 0;j<10;j++){
+        lArr[j]=function(){
+            console.log(j);
+        }
+    }
+    lArr[6]();//6
+</script>
+</body>
+</html>

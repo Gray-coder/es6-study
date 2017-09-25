@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+</head>
+<body>
+<script>
+    //let 声明的变量只能在其所在的代码块中有效
+    {
+        var a = 12;
+        let b = 10;
+
+        console.log(b);
+    }
+    console.log(a);//12
+    //console.log(b);//报错，只能在其所在的代码块中被访问
+
+    for (let i = 0; i < 10; i++) {
+        console.log(i);
+    }
+    //console.log(i);无效变量,计数器i只在for循环体内有效，在循环体外引用就会报错。
+    for (var  j = 0; j < 10; j++) {
+        console.log(j);
+    }
+    console.log(j);//10
+</script>
+</body>
+</html>

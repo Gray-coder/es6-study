@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+</head>
+<body>
+<button>000</button>
+<button>111</button>
+<button>222</button>
+<script>
+    //let块级作用域 等同于 匿名函数中的环境
+    window.onload = () => {
+        var arrBtn = document.getElementsByTagName('button');
+        /*for (var i = 0; i < arrBtn.length; i++) {
+             //var不存在块级作用域，需要利用匿名函数模拟块级作用域
+            (function (i) {
+                arrBtn[i].onclick=()=>{
+                    alert(i);
+                }
+            })(i)
+        }*/
+        for (let i = 0; i < arrBtn.length; i++) {
+            arrBtn[i].onclick = () => {
+                alert(i);
+            }
+        }
+    }
+</script>
+</body>
+</html>

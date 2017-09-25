@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>111</p>
+<p>222</p>
+<p>333</p>
+</body>
+<script>
+    //Array.from():把类数组的集合转换成真正的数组
+    //常见的类似数组的对象是DOM操作返回的NodeList集合，以及函数内部的arguments对象
+    {
+        let likeArray = {
+            0: 'aa',
+            1: 'bb',
+            2: 'cc',
+            length: 3
+        };
+        //es5
+        //var arr1 = [].slice.call(arrayLike); // ['aa', 'bb', 'cc']
+
+        /*likeArray.forEach((item)=>{
+            console.log(item);//报错
+        });*/
+        //es6
+        console.log(Array.from(likeArray));
+        Array.from(likeArray).forEach(item => {
+            console.log(item);
+        })
+
+    }
+    {
+        //NodeList集合
+        let p = document.querySelectorAll('p');
+        p.forEach(item => {
+            console.log(item);
+        });
+
+        Array.from(p).forEach(item => {
+            console.log(item);
+        });
+
+        //输出结果一样
+
+        function f() {
+            console.log(arguments);//[1,2,3,4,callee:function(){...}]
+            console.log(Array.from(arguments));//[1,2,3,4]
+            console.log(...arguments);
+        }
+
+        f(1, 2, 3, 4);
+    }
+    {
+        //处理字符串
+        let str = 'hello';
+        console.log(Array.from(str));
+        console.log(str.split(''));
+        //处理set对象
+        let sets = new Set(['1', '2', '3']);
+        console.log(sets);
+        console.log(...sets);
+        console.log(Array.from(sets));
+    }
+    {
+        //处理不兼容Array.from()
+        const toArray = (() =>
+                Array.from ? Array.from : obj => [].slice.call(obj))();
+
+    }
+    {
+        console.log(Array.from([3, 2, 4, 1, 5], item =>
+            item * item
+        ))
+    }
+
+</script>
+</html>

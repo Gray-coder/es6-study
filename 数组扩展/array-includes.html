@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+</head>
+<body>
+<script>
+    //判断数组中是否有某个元素,数组实例方法,类似于indexOf
+    {
+        console.log([1, 2, 3].includes(1));//true
+        console.log([1, 2, 3].includes(36));//false
+
+        console.log([1, 2, 3].indexOf(1))//0
+        console.log([1, 2, 3].indexOf(36))//-1
+    }
+    {
+        //简单数组去重
+        let delSame = (arr) => {
+            let resArr = [];
+            arr.forEach(item => {
+                //resArr.indexOf(item)==-1
+                if (!resArr.includes(item)) {
+                    resArr.push(item);
+                }
+            });
+            return resArr;
+        };
+
+        console.log(delSame([1, 2, 3, 3, 3, 1]));
+        //es6数组去重 666...
+        console.log(Array.from(new Set([1, 2, 3, 3, 3, 1])));
+    }
+</script>
+</body>
+</html>

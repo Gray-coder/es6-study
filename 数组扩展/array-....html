@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>es6 array</title>
+</head>
+<body>
+<script>
+  //扩展运算符（spread）是三个点（...）,将一个数组转为用逗号分隔的参数序列
+  {
+      //
+      console.log(...[1,2,3]);//1,2,3
+      console.log(23,4,...[1,2,9,7]);//23,4,1,2,9,7
+  }
+  {
+      //该运算符主要用于函数调用
+      function myPush(arr1,arr2) {
+          //push只能添加字符串，不能直接添加数组,返回的是新数组长度
+          return arr1.push(...arr2);
+      }
+      let arr1 = [1,2,3];
+      let arr2 = [4,5,6];
+      console.log(myPush(arr1,arr2),arr1);//6,[1,2,3,4,5,6]
+      console.log(arr1.push(...arr2),arr1);//9,[1,2,3,4,5,6,4,5,6]
+
+      function add(x,y,z) {
+          return x+y+z;
+      }
+      console.log(add(...[3,4,5]));//12
+  }
+  {
+      //替代数组的 apply 方法
+      //es5
+      function f(x,y,z) {
+        console.log(x,y,z);
+      }
+      var args = [1,2,3];
+      f.apply(null,args);
+
+      //es6
+      f(...args);
+
+      //求出数组最大元素
+      function getMax(arr) {
+          //Math.max():参数只能是逗号隔开的数字
+          //return Math.max.apply(null,arr);//es5
+          return Math.max(...arr);//es6
+      }
+      console.log(getMax([3,4,5]));//5
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数扩展</title>
+</head>
+<body>
+<script>
+    {
+        //默认参数
+        //es5
+        function f(x, y) {
+            y = y || 'world';
+            return x + " " + y;
+        }
+
+        console.log(f('hello', ''));//hello world
+        console.log(f('hello', false));//hello world
+        //es6
+        function f1(x, y = 'world') {
+            return x + " " + y;
+        }
+
+        console.log(f1('hello', ''));//hello
+        console.log(f1('hello', false));//hello fasle
+
+        let x = 99;
+
+        function foo(p = x + 1) {
+            console.log(p);
+        }
+
+        foo();// 100
+
+        x = 100;
+        foo();// 101
+    }
+    //rest 参数搭配的变量是一个数组，该变量将多余的参数放入数组中。
+    {
+        //rest 参数:将参数值转换为数组
+        //es6
+        function f(...arg) {
+            let sum  = 0;
+            for(let i of arg){
+                sum+=i;
+            }
+            return sum;
+        }
+        console.log(f(1,2,3,4,...[33,44]));//87
+        //es5
+        function add() {
+            let sum  = 0;
+            let arr = [].slice.call(arguments);
+            for(let i of arr){
+                sum+=i;
+            }
+            return sum;
+        }
+        console.log(add(1,2,3,4,...[33,44]));
+    }
+    {
+        //rest参数:将参数值转换为数组
+        //es5
+        function sort1() {
+            let arr = [].slice.call(arguments);
+            console.log(arguments);
+            console.log(arr.sort());
+        }
+        sort1(1,2,4,3,0);
+
+        //es6
+        function sort2(...arg) {
+            console.log(arg);
+            console.log(arg.sort());
+        }
+        sort2(1,2,4,3,0);
+
+        function push(arr,...args) {
+            args.forEach(item=>{
+                arr.push(item);
+            });
+            console.log(arr);
+        }
+        push([1,2],1,2,3,4);
+    }
+    {
+        //箭头函数体内的this对象，就是函数定义时所在的对象，而不是使用时所在的对象。
+        //箭头函数体内不能使用arguments，可用rest参数代替
+        let f=()=>{
+            let a = 100;
+            //alert(this);window
+            console.log(this.a);//undefined
+        };
+        f();
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+</head>
+<body>
+<script>
+    //for of 遍历数组和set对象(主要)
+    {
+        let arr = [1,2,3,4];
+        //默认遍历值
+        for(let val of arr){
+            console.log(val);//1,2,3,4
+        }
+        //遍历索引
+        for(let key of arr.keys()){
+            console.log(key);//0,1,2,3
+        }
+        //遍历键值对
+        for(let [k,v] of arr.entries()){
+            console.log(k,v);
+        }
+
+    }
+</script>
+</body>
+</html>

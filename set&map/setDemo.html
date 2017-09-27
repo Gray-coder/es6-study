@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>setDemo</title>
+</head>
+<body>
+<script>
+    //数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。
+    {
+        //定义
+        let list = new Set();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        console.log(list);
+
+        //定义1
+        let list1 = new Set([1, 2, 3, 4])
+        console.log(list1);
+    }
+    {
+        //去重
+        let arr = [1, 1, 2, 2, 3, 3];
+        let delSameArr = Array.from(new Set(arr));//去重
+        let delSameArr1 = [...new Set(arr)];//去重
+        console.log(delSameArr);
+        console.log(delSameArr1);
+    }
+    {
+        //Set对象实例 属性和方法
+        let set = new Set(['a', 'b', 'c', 'd']);
+        console.log(set.size);
+        console.log(set.has('a'), set);
+        console.log(set.delete('a'), set);
+        console.log(set.add('aa'), set);
+        set.clear();
+        console.log(set);
+    }
+    {
+        //遍历操作
+        let set = new Set(['a', 'b', 'c', 'd']);
+        //默认遍历值
+        for (let value of set) {
+            console.log(value);//a,b,c,d
+        }
+        console.log('--')
+        //遍历键(key)
+        for (let key of set.keys()) {
+            console.log(key);//a,b,c,d  set对象键值一样
+        }
+        //遍历键值对
+        for (let [key, value] of set.entries()) {
+            console.log(key, value);
+        }
+        //适用于es5 的 forEach()
+        set.forEach(item => {
+            console.log(item);//a b c d
+        });
+    }
+    {
+        //和...配合利用es5 方法
+        let set = new Set([4, 5, 6, 7]);
+        let set1 = [...set].filter(item => {
+            return item % 2 == 0;
+        });
+        console.log(set1);//[4.6]
+
+        let set2 = [...set].map(item => {
+            return item * 2;
+        });
+        console.log(set2);//[8,10,12,14]
+    }
+</script>
+</body>
+</html>

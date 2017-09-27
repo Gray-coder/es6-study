@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise all</title>
+</head>
+<body>
+<script>
+    {
+        //封装ajax
+        let myAjax = function (url) {
+            let p = new Promise((resolve, reject) => {
+                let XHR = new XMLHttpRequest();
+                XHR.open('GET', url, true);
+                XHR.send();
+
+                XHR.onreadystatechange = function () {
+                    if (XHR.readyState == 4) {
+                        if (XHR.status == 200) {
+                            let response = JSON.parse(XHR.responseText);
+                            resolve(response);
+                        } else {
+                            reject(XHR.statusText);
+                        }
+                    }
+                }
+            });
+            return p;
+        };
+
+        let url = 'https://hq.tigerbrokers.com/fundamental/finance_calendar/getType/2017-02-26/2017-06-10';
+        let url1 = 'https://hq.tigerbrokers.com/fundamental/finance_calendar/getType/2017-03-26/2017-06-10';
+
+        /*
+        * 与Promise.all相似的是，Promise.race都是以一个Promise对象组成的数组作为参数，不同的是，
+        * 只要当数组中的其中一个Promsie状态变成resolved或者rejected时，就可以调用.then方法了。
+        * 而传递给then方法的值也会有所不同
+        * */
+        Promise.race([myAjax(url), myAjax(url1)]).then(data => {
+            console.log(data);
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+</script>
+</body>
+</html>

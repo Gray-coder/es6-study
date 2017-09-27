@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise catch</title>
+</head>
+<body>
+<script>
+    {
+        //catch 类似于then中的第二个回调函数，除了返回promise失败后的错误，还可以处理promise成功后的异常
+        let p = new Promise(function (resolve, reject) {
+            let randomNum = Math.ceil(Math.random() * 10);
+            setTimeout(()=>{
+                if (randomNum >= 5) {
+                    resolve('数据合法:' + randomNum);//异步操作成功后，传递数据(消息)给then的回调函数
+                } else {
+                    //console.log();
+                    reject('数据不合法:' + randomNum);//异步操作失败后，传递错误给then的回调函数
+                }
+            });
+        },2000);
+        p.then((data) => {
+            alert(data);
+            console.log(some);//catch 处理该异常，返回some is not defined
+        }).catch((err)=>{
+            alert(err);//在resolve的回调中，我们console.log(some);而some这个变量是没有被定义的。
+            // 如果我们不用Promise，代码运行到这里就直接在控制台报错了，不往下运行了
+        })
+    }
+</script>
+</body>
+</html>

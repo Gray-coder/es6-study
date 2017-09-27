@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise基础</title>
+</head>
+<body>
+<script>
+    {
+        console.dir(Promise);
+        /*
+        * Promise构造函数的参数是一个函数，该函数有两个参数，
+        * 其中resolve参数表示 异步操作 执行成功后的回调函数，用于传递数据(消息)给then的回调函数
+        * reject参数表示 异步操作 失败后的回调函数，用于传递错误给then的回调函数
+        */
+        let p = new Promise((resolve) => {
+            //异步操作
+            setTimeout(() => {
+                resolve('hello promise');
+            }, 2000);
+            //resolve('hello promise');
+        });
+        //异步操作后的回调
+        p.then(
+            (data) => {
+                console.log(data);
+            }
+        )
+    }
+    {
+        let p = new Promise(function (resolve, reject) {
+            let randomNum = Math.ceil(Math.random() * 10);
+            setTimeout(() => {
+                if (randomNum >= 5) {
+                    resolve('数据合法:' + randomNum);//异步操作成功后，传递数据(消息)给then的回调函数
+                } else {
+                    reject('数据不合法:' + randomNum);//异步操作失败后，传递错误给then的回调函数
+                }
+            });
+        }, 2000);
+        p.then((data) => {
+            alert(data);
+        }, (err) => {
+            alert(err);
+        })
+    }
+</script>
+</body>
+</html>

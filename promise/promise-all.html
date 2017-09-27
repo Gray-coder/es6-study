@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise all</title>
+</head>
+<body>
+<script>
+    {
+        //封装ajax
+        let myAjax = function (url) {
+            let p = new Promise((resolve, reject) => {
+                let XHR = new XMLHttpRequest();
+                XHR.open('GET', url, true);
+                XHR.send();
+
+                XHR.onreadystatechange = function () {
+                    if (XHR.readyState == 4) {
+                        if (XHR.status == 200) {
+                            let response = JSON.parse(XHR.responseText);
+                            resolve(response);
+                        } else {
+                            reject(XHR.statusText);
+                        }
+                    }
+                }
+            });
+            return p;
+        };
+
+        let url = 'https://hq.tigerbrokers.com/fundamental/finance_calendar/getType/2017-02-26/2017-06-10';
+        let url1 = 'https://hq.tigerbrokers.com/fundamental/finance_calendar/getType/2017-03-26/2017-06-10';
+
+        myAjax(url).then(data => {
+            console.log(data);
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        //Promise的all方法提供了 并行 执行异步操作的能力，并且在 所有 异步操作执行完后才执行回调
+        //有了all，就可以 并行 执行多个 异步操作，并且在一个 回调 中处理所有的返回数据
+        Promise.all([myAjax(url), myAjax(url1)]).then(data => {
+            console.log(data);
+        }).catch(error => {
+            console.log(error);
+        })
+
+    }
+</script>
+</body>
+</html>
